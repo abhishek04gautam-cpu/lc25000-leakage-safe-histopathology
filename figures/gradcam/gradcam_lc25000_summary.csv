@@ -1,0 +1,9 @@
+case_type,test_position,true_index,true_label,predicted_index,predicted_label,confidence,gradcam_file
+correct,368,0,colon adenocarcinoma,0,colon adenocarcinoma,1.0,results/dissertation_figures/gradcam_lc25000/correct_testpos_368_true_0_pred_0.png
+correct,737,1,colon benign tissue,1,colon benign tissue,1.0,results/dissertation_figures/gradcam_lc25000/correct_testpos_737_true_1_pred_1.png
+correct,1485,2,lung adenocarcinoma,2,lung adenocarcinoma,1.0,results/dissertation_figures/gradcam_lc25000/correct_testpos_1485_true_2_pred_2.png
+correct,2238,3,lung benign tissue,3,lung benign tissue,1.0,results/dissertation_figures/gradcam_lc25000/correct_testpos_2238_true_3_pred_3.png
+correct,3357,4,lung squamous cell carcinoma,4,lung squamous cell carcinoma,1.0,results/dissertation_figures/gradcam_lc25000/correct_testpos_3357_true_4_pred_4.png
+misclassified,3379,4,lung squamous cell carcinoma,2,lung adenocarcinoma,0.813919,results/dissertation_figures/gradcam_lc25000/misclassified_testpos_3379_true_4_pred_2.png
+misclassified,3563,4,lung squamous cell carcinoma,2,lung adenocarcinoma,0.813919,results/dissertation_figures/gradcam_lc25000/misclassified_testpos_3563_true_4_pred_2.png
+misclassified,3669,4,lung squamous cell carcinoma,2,lung adenocarcinoma,0.713842,results/dissertation_figures/gradcam_lc25000/misclassified_testpos_3669_true_4_pred_2.png

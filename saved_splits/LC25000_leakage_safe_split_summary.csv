@@ -1,0 +1,16 @@
+split,class_name,samples
+train,colon adenocarcinoma,3513
+train,colon benign tissue,3499
+train,lung adenocarcinoma,3492
+train,lung benign tissue,3501
+train,lung squamous cell carcinoma,3505
+validation,colon adenocarcinoma,750
+validation,colon benign tissue,753
+validation,lung adenocarcinoma,755
+validation,lung benign tissue,748
+validation,lung squamous cell carcinoma,755
+test,colon adenocarcinoma,737
+test,colon benign tissue,748
+test,lung adenocarcinoma,753
+test,lung benign tissue,751
+test,lung squamous cell carcinoma,740

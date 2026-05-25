@@ -1,0 +1,2 @@
+total_images,total_near_duplicate_groups,largest_group_size,groups_with_more_than_one_image,hamming_threshold,train_samples,validation_samples,test_samples,train_val_group_overlap,train_test_group_overlap,val_test_group_overlap
+25000,22438,5,2304,2,17480,3745,3775,0,0,0

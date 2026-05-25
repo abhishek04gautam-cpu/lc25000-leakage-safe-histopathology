@@ -1,0 +1,2 @@
+dataset,split_type,model,accuracy,precision,recall,weighted_f1,macro_f1,balanced_accuracy,roc_auc,epochs,train_samples,validation_samples,test_samples,notes
+LC25000,leakage_safe_resized_image_hash_grouped_split,TransferCNN_ResNet18_HeadOnly_LeakageSafe,0.991955,0.991955,0.991955,0.991953,0.991957,0.991965,0.999888,50,17510,3761,3729,Deep model evaluated on leakage-safe split

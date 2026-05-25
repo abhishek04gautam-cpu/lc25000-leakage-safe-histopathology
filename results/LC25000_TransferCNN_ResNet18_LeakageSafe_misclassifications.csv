@@ -1,0 +1,4 @@
+y_true,y_pred,confidence,true_label,pred_label,prob_colon adenocarcinoma,prob_colon benign tissue,prob_lung adenocarcinoma,prob_lung benign tissue,prob_lung squamous cell carcinoma
+4,2,0.813919,lung squamous cell carcinoma,lung adenocarcinoma,0.0,0.0,0.813919,0.0,0.186081
+4,2,0.813919,lung squamous cell carcinoma,lung adenocarcinoma,0.0,0.0,0.813919,0.0,0.186081
+4,2,0.713842,lung squamous cell carcinoma,lung adenocarcinoma,0.0,0.0,0.713842,0.0,0.286158

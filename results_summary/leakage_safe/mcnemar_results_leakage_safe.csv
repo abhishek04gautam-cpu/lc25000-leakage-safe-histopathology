@@ -1,0 +1,12 @@
+dataset,comparison,model_a,model_b,both_correct,a_correct_b_wrong,a_wrong_b_correct,both_wrong,mcnemar_statistic,p_value,method
+LC25000,ResNet18 vs Logistic Regression,TransferCNN_ResNet18_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,2024,1702,2,1,2.0,0.0,McNemar exact
+LC25000,SimpleCNN vs Logistic Regression,SimpleCNN_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,2008,1684,18,19,18.0,0.0,McNemar exact
+LC25000,DenseNet121 vs Logistic Regression,TransferCNN_DenseNet121_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,2026,1703,0,0,0.0,0.0,McNemar exact
+LC25000,EfficientNet-B0 vs Logistic Regression,TransferCNN_EfficientNetB0_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,2026,1703,0,0,0.0,0.0,McNemar exact
+LC25000,ResNet18 vs SimpleCNN,TransferCNN_ResNet18_LeakageSafe,SimpleCNN_LeakageSafe,3689,37,3,0,3.0,1.946500560734421e-08,McNemar exact
+LC25000,DenseNet121 vs SimpleCNN,TransferCNN_DenseNet121_LeakageSafe,SimpleCNN_LeakageSafe,3692,37,0,0,0.0,1.4551915228366852e-11,McNemar exact
+LC25000,EfficientNet-B0 vs SimpleCNN,TransferCNN_EfficientNetB0_LeakageSafe,SimpleCNN_LeakageSafe,3692,37,0,0,0.0,1.4551915228366852e-11,McNemar exact
+LC25000,DenseNet121 vs ResNet18,TransferCNN_DenseNet121_LeakageSafe,TransferCNN_ResNet18_LeakageSafe,3726,3,0,0,0.0,0.25,McNemar exact
+LC25000,EfficientNet-B0 vs ResNet18,TransferCNN_EfficientNetB0_LeakageSafe,TransferCNN_ResNet18_LeakageSafe,3726,3,0,0,0.0,0.25,McNemar exact
+LC25000,DenseNet121 vs EfficientNet-B0,TransferCNN_DenseNet121_LeakageSafe,TransferCNN_EfficientNetB0_LeakageSafe,3729,0,0,0,0.0,1.0,McNemar exact
+LC25000,ResNet18 vs ResNet18 Head Only,TransferCNN_ResNet18_LeakageSafe,TransferCNN_ResNet18_HeadOnly_LeakageSafe,3698,28,1,2,1.0,1.1175870895385742e-07,McNemar exact

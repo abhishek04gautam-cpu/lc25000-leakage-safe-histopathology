@@ -1,0 +1,11 @@
+model,bin_lower,bin_upper,samples,mean_confidence,accuracy,absolute_gap
+LC25000_TransferCNN_EfficientNetB0_LeakageSafe,0.0,0.1,0,,,
+LC25000_TransferCNN_EfficientNetB0_LeakageSafe,0.1,0.2,0,,,
+LC25000_TransferCNN_EfficientNetB0_LeakageSafe,0.2,0.3,0,,,
+LC25000_TransferCNN_EfficientNetB0_LeakageSafe,0.3,0.4,0,,,
+LC25000_TransferCNN_EfficientNetB0_LeakageSafe,0.4,0.5,0,,,
+LC25000_TransferCNN_EfficientNetB0_LeakageSafe,0.5,0.6,0,,,
+LC25000_TransferCNN_EfficientNetB0_LeakageSafe,0.6,0.7,1,0.694163,1.0,0.305837
+LC25000_TransferCNN_EfficientNetB0_LeakageSafe,0.7,0.8,1,0.778556,1.0,0.221444
+LC25000_TransferCNN_EfficientNetB0_LeakageSafe,0.8,0.9,1,0.826684,1.0,0.173316
+LC25000_TransferCNN_EfficientNetB0_LeakageSafe,0.9,1.0,3726,0.999917,1.0,8.3e-05

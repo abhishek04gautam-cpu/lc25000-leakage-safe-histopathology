@@ -1,0 +1,5 @@
+model,samples,accuracy,mean_confidence,expected_calibration_error,maximum_calibration_error,multiclass_brier_score,n_bins
+LC25000_TransferCNN_ResNet18_LeakageSafe,3729,0.999195,0.998814,0.001106,0.459248,0.001502,10
+LC25000_SimpleCNN_LeakageSafe,3729,0.990078,0.989637,0.00243,0.137363,0.014403,10
+LC25000_TransferCNN_DenseNet121_LeakageSafe,3729,1.0,0.999831,0.000169,0.370916,7.9e-05,10
+LC25000_TransferCNN_EfficientNetB0_LeakageSafe,3729,1.0,0.999729,0.000271,0.305837,9.5e-05,10

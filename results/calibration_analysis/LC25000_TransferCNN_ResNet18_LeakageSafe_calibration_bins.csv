@@ -1,0 +1,11 @@
+model,bin_lower,bin_upper,samples,mean_confidence,accuracy,absolute_gap
+LC25000_TransferCNN_ResNet18_LeakageSafe,0.0,0.1,0,,,
+LC25000_TransferCNN_ResNet18_LeakageSafe,0.1,0.2,0,,,
+LC25000_TransferCNN_ResNet18_LeakageSafe,0.2,0.3,0,,,
+LC25000_TransferCNN_ResNet18_LeakageSafe,0.3,0.4,0,,,
+LC25000_TransferCNN_ResNet18_LeakageSafe,0.4,0.5,0,,,
+LC25000_TransferCNN_ResNet18_LeakageSafe,0.5,0.6,2,0.540752,1.0,0.459248
+LC25000_TransferCNN_ResNet18_LeakageSafe,0.6,0.7,2,0.611069,1.0,0.388931
+LC25000_TransferCNN_ResNet18_LeakageSafe,0.7,0.8,3,0.739774,0.666667,0.073108
+LC25000_TransferCNN_ResNet18_LeakageSafe,0.8,0.9,5,0.826571,0.6,0.226571
+LC25000_TransferCNN_ResNet18_LeakageSafe,0.9,1.0,3717,0.99971,1.0,0.00029

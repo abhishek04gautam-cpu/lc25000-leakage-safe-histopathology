@@ -1,0 +1,11 @@
+model,bin_lower,bin_upper,samples,mean_confidence,accuracy,absolute_gap
+LC25000_SimpleCNN_LeakageSafe,0.0,0.1,0,,,
+LC25000_SimpleCNN_LeakageSafe,0.1,0.2,0,,,
+LC25000_SimpleCNN_LeakageSafe,0.2,0.3,0,,,
+LC25000_SimpleCNN_LeakageSafe,0.3,0.4,0,,,
+LC25000_SimpleCNN_LeakageSafe,0.4,0.5,0,,,
+LC25000_SimpleCNN_LeakageSafe,0.5,0.6,17,0.549128,0.411765,0.137363
+LC25000_SimpleCNN_LeakageSafe,0.6,0.7,20,0.638282,0.6,0.038282
+LC25000_SimpleCNN_LeakageSafe,0.7,0.8,26,0.754186,0.730769,0.023416
+LC25000_SimpleCNN_LeakageSafe,0.8,0.9,44,0.8504,0.954545,0.104146
+LC25000_SimpleCNN_LeakageSafe,0.9,1.0,3622,0.997027,0.997239,0.000212

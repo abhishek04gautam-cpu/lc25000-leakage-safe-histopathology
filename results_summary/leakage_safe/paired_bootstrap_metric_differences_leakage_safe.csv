@@ -1,0 +1,45 @@
+dataset,comparison,model_a,model_b,metric,model_a_score,model_b_score,difference_a_minus_b,ci_lower,ci_upper,bootstrap_p_approx,n_bootstrap,interpretation
+LC25000,ResNet18 vs Logistic Regression,TransferCNN_ResNet18_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,accuracy,0.999195,0.543309,0.455886,0.440594,0.471976,0.0,2000,A higher; CI excludes zero
+LC25000,ResNet18 vs Logistic Regression,TransferCNN_ResNet18_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,weighted_f1,0.999195,0.541347,0.457848,0.442584,0.474321,0.0,2000,A higher; CI excludes zero
+LC25000,ResNet18 vs Logistic Regression,TransferCNN_ResNet18_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,macro_f1,0.999196,0.541109,0.458088,0.443118,0.473758,0.0,2000,A higher; CI excludes zero
+LC25000,ResNet18 vs Logistic Regression,TransferCNN_ResNet18_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,balanced_accuracy,0.999189,0.543049,0.456141,0.440991,0.471568,0.0,2000,A higher; CI excludes zero
+LC25000,SimpleCNN vs Logistic Regression,SimpleCNN_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,accuracy,0.990078,0.543309,0.446769,0.430947,0.463127,0.0,2000,A higher; CI excludes zero
+LC25000,SimpleCNN vs Logistic Regression,SimpleCNN_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,weighted_f1,0.990066,0.541347,0.448719,0.43326,0.465164,0.0,2000,A higher; CI excludes zero
+LC25000,SimpleCNN vs Logistic Regression,SimpleCNN_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,macro_f1,0.99007,0.541109,0.448962,0.433728,0.464818,0.0,2000,A higher; CI excludes zero
+LC25000,SimpleCNN vs Logistic Regression,SimpleCNN_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,balanced_accuracy,0.990107,0.543049,0.447059,0.431421,0.462686,0.0,2000,A higher; CI excludes zero
+LC25000,DenseNet121 vs Logistic Regression,TransferCNN_DenseNet121_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,accuracy,1.0,0.543309,0.456691,0.441405,0.472781,0.0,2000,A higher; CI excludes zero
+LC25000,DenseNet121 vs Logistic Regression,TransferCNN_DenseNet121_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,weighted_f1,1.0,0.541347,0.458653,0.443432,0.475087,0.0,2000,A higher; CI excludes zero
+LC25000,DenseNet121 vs Logistic Regression,TransferCNN_DenseNet121_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,macro_f1,1.0,0.541109,0.458891,0.443951,0.47456,0.0,2000,A higher; CI excludes zero
+LC25000,DenseNet121 vs Logistic Regression,TransferCNN_DenseNet121_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,balanced_accuracy,1.0,0.543049,0.456951,0.441943,0.472356,0.0,2000,A higher; CI excludes zero
+LC25000,EfficientNet-B0 vs Logistic Regression,TransferCNN_EfficientNetB0_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,accuracy,1.0,0.543309,0.456691,0.441405,0.472781,0.0,2000,A higher; CI excludes zero
+LC25000,EfficientNet-B0 vs Logistic Regression,TransferCNN_EfficientNetB0_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,weighted_f1,1.0,0.541347,0.458653,0.443432,0.475087,0.0,2000,A higher; CI excludes zero
+LC25000,EfficientNet-B0 vs Logistic Regression,TransferCNN_EfficientNetB0_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,macro_f1,1.0,0.541109,0.458891,0.443951,0.47456,0.0,2000,A higher; CI excludes zero
+LC25000,EfficientNet-B0 vs Logistic Regression,TransferCNN_EfficientNetB0_LeakageSafe,LogisticRegression_Downsampled_LeakageSafe,balanced_accuracy,1.0,0.543049,0.456951,0.441943,0.472356,0.0,2000,A higher; CI excludes zero
+LC25000,ResNet18 vs SimpleCNN,TransferCNN_ResNet18_LeakageSafe,SimpleCNN_LeakageSafe,accuracy,0.999195,0.990078,0.009118,0.006168,0.012604,0.0,2000,A higher; CI excludes zero
+LC25000,ResNet18 vs SimpleCNN,TransferCNN_ResNet18_LeakageSafe,SimpleCNN_LeakageSafe,weighted_f1,0.999195,0.990066,0.009129,0.006171,0.012636,0.0,2000,A higher; CI excludes zero
+LC25000,ResNet18 vs SimpleCNN,TransferCNN_ResNet18_LeakageSafe,SimpleCNN_LeakageSafe,macro_f1,0.999196,0.99007,0.009126,0.006185,0.012624,0.0,2000,A higher; CI excludes zero
+LC25000,ResNet18 vs SimpleCNN,TransferCNN_ResNet18_LeakageSafe,SimpleCNN_LeakageSafe,balanced_accuracy,0.999189,0.990107,0.009082,0.006095,0.012537,0.0,2000,A higher; CI excludes zero
+LC25000,DenseNet121 vs SimpleCNN,TransferCNN_DenseNet121_LeakageSafe,SimpleCNN_LeakageSafe,accuracy,1.0,0.990078,0.009922,0.006972,0.013408,0.0,2000,A higher; CI excludes zero
+LC25000,DenseNet121 vs SimpleCNN,TransferCNN_DenseNet121_LeakageSafe,SimpleCNN_LeakageSafe,weighted_f1,1.0,0.990066,0.009934,0.00698,0.013428,0.0,2000,A higher; CI excludes zero
+LC25000,DenseNet121 vs SimpleCNN,TransferCNN_DenseNet121_LeakageSafe,SimpleCNN_LeakageSafe,macro_f1,1.0,0.99007,0.00993,0.00704,0.013356,0.0,2000,A higher; CI excludes zero
+LC25000,DenseNet121 vs SimpleCNN,TransferCNN_DenseNet121_LeakageSafe,SimpleCNN_LeakageSafe,balanced_accuracy,1.0,0.990107,0.009893,0.007084,0.013298,0.0,2000,A higher; CI excludes zero
+LC25000,EfficientNet-B0 vs SimpleCNN,TransferCNN_EfficientNetB0_LeakageSafe,SimpleCNN_LeakageSafe,accuracy,1.0,0.990078,0.009922,0.006972,0.013408,0.0,2000,A higher; CI excludes zero
+LC25000,EfficientNet-B0 vs SimpleCNN,TransferCNN_EfficientNetB0_LeakageSafe,SimpleCNN_LeakageSafe,weighted_f1,1.0,0.990066,0.009934,0.00698,0.013428,0.0,2000,A higher; CI excludes zero
+LC25000,EfficientNet-B0 vs SimpleCNN,TransferCNN_EfficientNetB0_LeakageSafe,SimpleCNN_LeakageSafe,macro_f1,1.0,0.99007,0.00993,0.00704,0.013356,0.0,2000,A higher; CI excludes zero
+LC25000,EfficientNet-B0 vs SimpleCNN,TransferCNN_EfficientNetB0_LeakageSafe,SimpleCNN_LeakageSafe,balanced_accuracy,1.0,0.990107,0.009893,0.007084,0.013298,0.0,2000,A higher; CI excludes zero
+LC25000,DenseNet121 vs ResNet18,TransferCNN_DenseNet121_LeakageSafe,TransferCNN_ResNet18_LeakageSafe,accuracy,1.0,0.999195,0.000805,0.0,0.001877,0.104,2000,Difference uncertain; CI includes zero
+LC25000,DenseNet121 vs ResNet18,TransferCNN_DenseNet121_LeakageSafe,TransferCNN_ResNet18_LeakageSafe,weighted_f1,1.0,0.999195,0.000805,0.0,0.001877,0.104,2000,Difference uncertain; CI includes zero
+LC25000,DenseNet121 vs ResNet18,TransferCNN_DenseNet121_LeakageSafe,TransferCNN_ResNet18_LeakageSafe,macro_f1,1.0,0.999196,0.000804,0.0,0.00183,0.104,2000,Difference uncertain; CI includes zero
+LC25000,DenseNet121 vs ResNet18,TransferCNN_DenseNet121_LeakageSafe,TransferCNN_ResNet18_LeakageSafe,balanced_accuracy,1.0,0.999189,0.000811,0.0,0.001816,0.104,2000,Difference uncertain; CI includes zero
+LC25000,EfficientNet-B0 vs ResNet18,TransferCNN_EfficientNetB0_LeakageSafe,TransferCNN_ResNet18_LeakageSafe,accuracy,1.0,0.999195,0.000805,0.0,0.001877,0.104,2000,Difference uncertain; CI includes zero
+LC25000,EfficientNet-B0 vs ResNet18,TransferCNN_EfficientNetB0_LeakageSafe,TransferCNN_ResNet18_LeakageSafe,weighted_f1,1.0,0.999195,0.000805,0.0,0.001877,0.104,2000,Difference uncertain; CI includes zero
+LC25000,EfficientNet-B0 vs ResNet18,TransferCNN_EfficientNetB0_LeakageSafe,TransferCNN_ResNet18_LeakageSafe,macro_f1,1.0,0.999196,0.000804,0.0,0.00183,0.104,2000,Difference uncertain; CI includes zero
+LC25000,EfficientNet-B0 vs ResNet18,TransferCNN_EfficientNetB0_LeakageSafe,TransferCNN_ResNet18_LeakageSafe,balanced_accuracy,1.0,0.999189,0.000811,0.0,0.001816,0.104,2000,Difference uncertain; CI includes zero
+LC25000,DenseNet121 vs EfficientNet-B0,TransferCNN_DenseNet121_LeakageSafe,TransferCNN_EfficientNetB0_LeakageSafe,accuracy,1.0,1.0,0.0,0.0,0.0,1.0,2000,Difference uncertain; CI includes zero
+LC25000,DenseNet121 vs EfficientNet-B0,TransferCNN_DenseNet121_LeakageSafe,TransferCNN_EfficientNetB0_LeakageSafe,weighted_f1,1.0,1.0,0.0,0.0,0.0,1.0,2000,Difference uncertain; CI includes zero
+LC25000,DenseNet121 vs EfficientNet-B0,TransferCNN_DenseNet121_LeakageSafe,TransferCNN_EfficientNetB0_LeakageSafe,macro_f1,1.0,1.0,0.0,0.0,0.0,1.0,2000,Difference uncertain; CI includes zero
+LC25000,DenseNet121 vs EfficientNet-B0,TransferCNN_DenseNet121_LeakageSafe,TransferCNN_EfficientNetB0_LeakageSafe,balanced_accuracy,1.0,1.0,0.0,0.0,0.0,1.0,2000,Difference uncertain; CI includes zero
+LC25000,ResNet18 vs ResNet18 Head Only,TransferCNN_ResNet18_LeakageSafe,TransferCNN_ResNet18_HeadOnly_LeakageSafe,accuracy,0.999195,0.991955,0.007241,0.004559,0.01019,0.0,2000,A higher; CI excludes zero
+LC25000,ResNet18 vs ResNet18 Head Only,TransferCNN_ResNet18_LeakageSafe,TransferCNN_ResNet18_HeadOnly_LeakageSafe,weighted_f1,0.999195,0.991953,0.007243,0.004559,0.010193,0.0,2000,A higher; CI excludes zero
+LC25000,ResNet18 vs ResNet18 Head Only,TransferCNN_ResNet18_LeakageSafe,TransferCNN_ResNet18_HeadOnly_LeakageSafe,macro_f1,0.999196,0.991957,0.00724,0.004558,0.010253,0.0,2000,A higher; CI excludes zero
+LC25000,ResNet18 vs ResNet18 Head Only,TransferCNN_ResNet18_LeakageSafe,TransferCNN_ResNet18_HeadOnly_LeakageSafe,balanced_accuracy,0.999189,0.991965,0.007224,0.00454,0.010215,0.0,2000,A higher; CI excludes zero
