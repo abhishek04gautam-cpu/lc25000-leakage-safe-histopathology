@@ -7,7 +7,7 @@ authors:
     given-names: "Abhishek"
 version: 1.0.0
 date-released: 2026-05-25
-repository-code: "https://github.com/USERNAME/REPOSITORY"
+repository-code: "https://github.com/abhishek04gautam-cpu/lc25000-leakage-safe-histopathology"
 license: MIT
 keywords:
   - histopathology
