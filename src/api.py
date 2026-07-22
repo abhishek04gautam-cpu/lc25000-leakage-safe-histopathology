@@ -96,7 +96,6 @@ def health():
         "status": "ok",
         "device": str(device),
         "model_loaded": model is not None,
-        "model_path": str(DEPLOYED_MODEL_PATH),
         "model": DEPLOYED_MODEL_NAME,
         "classes": LC25000_CLASS_NAMES,
         "disclaimer": RESEARCH_DISCLAIMER,
