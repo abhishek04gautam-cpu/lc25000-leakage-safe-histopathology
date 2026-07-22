@@ -20,6 +20,23 @@ To address this, the project evaluates classical machine-learning and deep-learn
 
 ---
 
+## At a Glance
+
+| Area | Summary |
+|---|---|
+| Problem | Reliable five-class lung and colon histopathology classification |
+| Primary dataset | LC25000 — 25,000 histopathology images |
+| Models | Logistic Regression, SimpleCNN, ResNet-18, DenseNet-121 and EfficientNet-B0 |
+| Reliability focus | Exact-duplicate and near-duplicate-aware evaluation |
+| Best leakage-safe result | DenseNet-121 and EfficientNet-B0 achieved 1.0000 rounded accuracy |
+| Near-duplicate-safe result | ResNet-18 achieved 0.9992 macro F1 |
+| External evaluation | Colon-only CRC-VAL-HE-7K accuracy: 0.8582 |
+| Explainability | Grad-CAM |
+| Deployment | FastAPI research prototype |
+| Technology stack | Python, PyTorch, scikit-learn, OpenCV and FastAPI |
+
+---
+
 ## Project Highlights
 
 - Evaluated Logistic Regression, a custom CNN and four transfer-learning configurations
