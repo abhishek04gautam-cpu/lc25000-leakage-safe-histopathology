@@ -1,18 +1,26 @@
 cff-version: 1.2.0
-title: "Leakage-Safe and Externally Validated Evaluation of Deep Learning Models for LC25000 Histopathology Classification"
-message: "If you use this repository, please cite the accompanying manuscript or this software artifact."
+
+message: "If you use this software, please cite it using the metadata in this file."
+
+title: "Leakage-Safe Histopathology Classification on LC25000"
+
 type: software
+
 authors:
-  - family-names: "Abhishek"
-    given-names: "Abhishek"
-version: 1.0.0
-date-released: 2026-05-25
+  - given-names: "Abhishek"
+
 repository-code: "https://github.com/abhishek04gautam-cpu/lc25000-leakage-safe-histopathology"
+
 license: MIT
+
 keywords:
   - histopathology
   - LC25000
   - data leakage
   - near-duplicate detection
-  - external validation
+  - limited external validation
   - deep learning
+  - PyTorch
+  - computer vision
+  - model calibration
+  - explainable artificial intelligence
