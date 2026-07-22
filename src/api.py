@@ -1,5 +1,6 @@
 """FastAPI deployment prototype for LC25000 histopathology classification."""
 
+from contextlib import asynccontextmanager
 from io import BytesIO
 
 import torch
@@ -19,8 +20,6 @@ from config import (
 )
 from model import TransferCNN
 
-
-app = FastAPI(title=API_TITLE, version=API_VERSION)
 
 device = torch.device(
     "mps"
@@ -71,12 +70,22 @@ def load_lc25000_model():
     return loaded_model
 
 
-@app.on_event("startup")
-def startup_event():
-    """Load the trained model when the API starts."""
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    """Load the model at startup and release it at shutdown."""
 
     global model
+
     model = load_lc25000_model()
+    yield
+    model = None
+
+
+app = FastAPI(
+    title=API_TITLE,
+    version=API_VERSION,
+    lifespan=lifespan,
+)
 
 
 @app.get("/health")
