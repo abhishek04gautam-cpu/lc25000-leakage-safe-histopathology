@@ -39,6 +39,43 @@ To address this, the project evaluates classical machine-learning and deep-learn
 
 ---
 
+## Project Workflow
+
+```mermaid
+flowchart LR
+    A[LC25000 Dataset] --> B[Data Loading and Preprocessing]
+    B --> C[Exact-Duplicate Audit]
+    C --> D[Near-Duplicate Detection]
+    D --> E[Group-Aware Dataset Splitting]
+
+    E --> F[Logistic Regression Baseline]
+    E --> G[SimpleCNN]
+    E --> H[Transfer-Learning Models]
+
+    H --> H1[ResNet-18]
+    H --> H2[DenseNet-121]
+    H --> H3[EfficientNet-B0]
+
+    F --> I[Model Evaluation]
+    G --> I
+    H1 --> I
+    H2 --> I
+    H3 --> I
+
+    I --> J[Bootstrap and McNemar Testing]
+    I --> K[Calibration Analysis]
+    I --> L[Grad-CAM Explainability]
+    I --> M[Robustness Evaluation]
+
+    J --> N[Limited External Colon Validation]
+    K --> N
+    L --> N
+    M --> N
+
+    N --> O[FastAPI Research Prototype]
+```
+---
+
 ## Project Highlights
 
 - Evaluated Logistic Regression, a custom CNN and four transfer-learning configurations
