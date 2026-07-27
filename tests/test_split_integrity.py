@@ -5,7 +5,6 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-
 SAVED_SPLITS_DIR = Path("saved_splits")
 SPLIT_FILES = sorted(SAVED_SPLITS_DIR.rglob("*.npz"))
 
