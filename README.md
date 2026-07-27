@@ -1127,8 +1127,8 @@ This project is released under the [MIT License](LICENSE).
 
 **Abhishek**
 
-AI and Machine Learning Engineer  
-MSc Artificial Intelligence with Distinction  
+AI and Machine Learning Engineer<br>
+MSc Artificial Intelligence with Distinction<br>
 Former Software Engineer at HCL Technologies
 
 - LinkedIn: https://www.linkedin.com/in/abhishek-b98059240
