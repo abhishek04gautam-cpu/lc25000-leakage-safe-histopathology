@@ -1,8 +1,9 @@
 """FastAPI research prototype for LC25000 histopathology classification."""
 
+import logging
 from contextlib import asynccontextmanager
 from io import BytesIO
-import logging
+from typing import Annotated
 
 import torch
 from fastapi import (
@@ -29,7 +30,6 @@ from config import (
     RESEARCH_DISCLAIMER,
 )
 from model import TransferCNN
-
 
 logger = logging.getLogger(__name__)
 
@@ -250,7 +250,7 @@ async def read_uploaded_image(file: UploadFile) -> Image.Image:
 )
 async def predict(
     request: Request,
-    file: UploadFile = File(...),
+    file: Annotated[UploadFile, File(...)],
 ) -> PredictionResponse:
     """Classify an uploaded histopathology image."""
 
