@@ -1,5 +1,7 @@
 # Leakage-Safe Histopathology Classification on LC25000
 
+[![Code Quality and Tests](https://github.com/abhishek04gautam-cpu/lc25000-leakage-safe-histopathology/actions/workflows/ci.yml/badge.svg)](https://github.com/abhishek04gautam-cpu/lc25000-leakage-safe-histopathology/actions/workflows/ci.yml)
+
 ### Duplicate-aware deep-learning evaluation with robustness analysis, explainability and limited external colon validation
 
 This repository contains the code, saved dataset splits, evaluation outputs and supporting artefacts from my MSc Artificial Intelligence dissertation at the University of East London.
