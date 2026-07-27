@@ -550,6 +550,20 @@ http://localhost:8000/docs
 
 This is an example research output, not a clinical interpretation.
 
+### Example Swagger UI prediction
+
+<p align="center">
+  <img
+    src="figures/api/fastapi_prediction_demo.png"
+    alt="Successful FastAPI histopathology prediction response in Swagger UI"
+    width="900"
+  />
+</p>
+
+<p align="center">
+  <em>Example research-prototype response. This output is not a clinical diagnosis.</em>
+</p>
+
 ---
 
 ## Model Checkpoint
