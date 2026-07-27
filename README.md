@@ -1,41 +1,70 @@
 # Leakage-Safe Histopathology Classification on LC25000
 
 [![Code Quality and Tests](https://github.com/abhishek04gautam-cpu/lc25000-leakage-safe-histopathology/actions/workflows/ci.yml/badge.svg)](https://github.com/abhishek04gautam-cpu/lc25000-leakage-safe-histopathology/actions/workflows/ci.yml)
+[![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-ee4c2c.svg)](https://pytorch.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-Research%20API-009688.svg)](https://fastapi.tiangolo.com/)
+[![Docker](https://img.shields.io/badge/Docker-CPU%20Inference-2496ed.svg)](Dockerfile)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-### Duplicate-aware deep-learning evaluation with robustness analysis, explainability and limited external colon validation
+### Duplicate-aware deep-learning evaluation with robustness analysis, explainability, external colon validation and a containerised inference API
 
 This repository contains the code, saved dataset splits, evaluation outputs and supporting artefacts from my MSc Artificial Intelligence dissertation at the University of East London.
 
-The project investigates a key reliability problem in medical-image classification:
+The project investigates a key reliability question in medical-image classification:
 
 > Can duplicate and near-duplicate histopathology image patches produce overly optimistic model-performance estimates?
 
-To address this, the project evaluates classical machine-learning and deep-learning models under progressively stricter experimental protocols:
-
-1. Initial stratified evaluation
-2. Exact-duplicate-aware leakage-safe evaluation
-3. Near-duplicate-aware grouped evaluation
-4. Test-time robustness analysis
-5. Calibration and confidence analysis
-6. Grad-CAM explainability
-7. Limited external colon-only validation
+Rather than reporting accuracy alone, the repository presents an end-to-end evidence chain covering data-leakage auditing, group-aware splitting, deep-learning evaluation, statistical testing, calibration, explainability, robustness, limited external validation, automated testing, CI and Docker-based API inference.
 
 ---
 
-## At a Glance
+## 60-Second Project Review
 
 | Area | Summary |
 |---|---|
 | Problem | Reliable five-class lung and colon histopathology classification |
 | Primary dataset | LC25000 — 25,000 histopathology images |
-| Models | Logistic Regression, SimpleCNN, ResNet-18, DenseNet-121 and EfficientNet-B0 |
 | Reliability focus | Exact-duplicate and near-duplicate-aware evaluation |
+| Models | Logistic Regression, SimpleCNN, ResNet-18, DenseNet-121 and EfficientNet-B0 |
 | Best leakage-safe result | DenseNet-121 and EfficientNet-B0 achieved 1.0000 rounded accuracy |
+| Selected deployable model | Leakage-safe ResNet-18 |
 | Near-duplicate-safe result | ResNet-18 achieved 0.9992 macro F1 |
-| External evaluation | Colon-only CRC-VAL-HE-7K accuracy: 0.8582 |
-| Explainability | Grad-CAM |
-| Deployment | FastAPI research prototype |
-| Technology stack | Python, PyTorch, scikit-learn, OpenCV and FastAPI |
+| External evaluation | CRC-VAL-HE-7K colon-restricted accuracy: 0.8582 |
+| Statistical analysis | Bootstrap confidence intervals, paired bootstrap comparisons and McNemar tests |
+| Responsible-AI analysis | Calibration, confidence, Grad-CAM, robustness and explicit clinical limitations |
+| Engineering | FastAPI, Pydantic, pytest, Ruff, GitHub Actions and Docker |
+| Deployment model | CPU-only Docker inference with a read-only mounted checkpoint |
+
+### Reviewer shortcuts
+
+- [Results overview](RESULTS_OVERVIEW.md)
+- [FastAPI implementation](src/api.py)
+- [Model definitions](src/model.py)
+- [Automated tests](tests/)
+- [CI workflow](.github/workflows/ci.yml)
+- [Dockerfile](Dockerfile)
+- [Saved splits](saved_splits/)
+- [Leakage-audit evidence](leakage_audit/)
+- [Machine-readable results](results_summary/)
+- [Figures](figures/)
+
+---
+
+## Why This Repository Stands Out
+
+- Audits exact and near-duplicate relationships before interpreting model performance
+- Uses deterministic group-aware train, validation and test splits
+- Compares classical, custom-CNN and transfer-learning baselines
+- Preserves prediction-level outputs for paired statistical testing
+- Reports confidence intervals rather than relying only on point estimates
+- Evaluates calibration, temperature scaling, robustness and Grad-CAM explanations
+- Includes limited independent colorectal validation to expose domain shift
+- Provides a typed FastAPI inference service with input validation and research disclaimers
+- Includes automated API and split-integrity tests
+- Runs code-quality and test checks through GitHub Actions
+- Provides a tested CPU-only Docker workflow with a read-only model mount
+- Keeps datasets and trained weights outside Git while documenting the required paths and checksum
 
 ---
 
@@ -73,43 +102,10 @@ flowchart LR
     M --> N
 
     N --> O[FastAPI Research Prototype]
+    O --> P[pytest and Ruff]
+    P --> Q[GitHub Actions CI]
+    Q --> R[CPU-Only Docker Inference]
 ```
----
-
-## Project Highlights
-
-- Evaluated Logistic Regression, a custom CNN and four transfer-learning configurations
-- Compared ResNet-18, DenseNet-121 and EfficientNet-B0 architectures
-- Detected exact duplicate overlap using resized-image hashing
-- Identified visually similar image relationships using perceptual average hashing
-- Created deterministic group-aware train, validation and test splits
-- Applied bootstrap confidence intervals and McNemar significance testing
-- Evaluated confidence, calibration and temperature scaling
-- Used Grad-CAM to inspect correct and misclassified predictions
-- Conducted test-time robustness analysis under image perturbations
-- Performed limited external colon-only validation using CRC-VAL-HE-7K
-- Developed a prototype FastAPI image-classification service
-- Preserved saved splits, predictions, metrics and figures for reproducibility
-
----
-
-## Why This Project Matters
-
-Histopathology datasets often contain image patches derived from larger tissue regions. Images originating from related or overlapping areas may be duplicated or visually similar.
-
-When related patches appear across training and test sets, a model may partly recognise repeated visual patterns instead of learning features that generalise to genuinely independent samples. This can inflate reported accuracy and create misleading confidence in model performance.
-
-This project therefore focuses not only on model accuracy, but also on:
-
-- Data-leakage detection
-- Near-duplicate mitigation
-- Reproducible evaluation
-- Statistical significance
-- Model calibration
-- Explainability
-- Robustness
-- External-domain generalisation
-- Responsible interpretation of medical-AI results
 
 ---
 
@@ -142,7 +138,7 @@ The primary dataset contains 25,000 histopathology images across five balanced c
 | `lung_n` | Lung benign tissue |
 | `lung_scc` | Lung squamous-cell carcinoma |
 
-Images are resized to `224 × 224` RGB inputs for CNN training.
+Images are resized to `224 × 224` RGB inputs for CNN training and inference.
 
 The dataset is not redistributed in this repository. Download it from its original public source and place it under:
 
@@ -157,7 +153,7 @@ datasets/
         └── lung_scc/
 ```
 
-The loader searches recursively, so the five class folders may be nested within the downloaded dataset structure.
+The loader searches recursively, so the five class folders may be nested inside the downloaded directory structure.
 
 ### External validation dataset
 
@@ -181,7 +177,7 @@ datasets/
         └── <other CRC-VAL-HE-7K classes>
 ```
 
-Alternatively, set the environment variable:
+Alternatively:
 
 ```bash
 export CRC_VAL_HE_7K_ROOT="/path/to/CRC-VAL-HE-7K"
@@ -193,15 +189,11 @@ export CRC_VAL_HE_7K_ROOT="/path/to/CRC-VAL-HE-7K"
 
 ### 1. Initial stratified split
 
-The initial experiment used a persisted stratified train, validation and test split.
+The initial experiment used a persisted stratified train, validation and test split. This protocol provided the starting benchmark but was subsequently audited for cross-split image overlap.
 
-This protocol provided the starting benchmark but was later audited for cross-split image overlap.
-
-### 2. Leakage-safe split
+### 2. Exact-duplicate-aware leakage-safe split
 
 Exact or effectively identical resized images were grouped before splitting to reduce train-test leakage.
-
-The resulting split contained:
 
 | Partition | Samples |
 |---|---:|
@@ -209,17 +201,21 @@ The resulting split contained:
 | Validation | 3,761 |
 | Test | 3,729 |
 
-### 3. Near-duplicate-safe split
+### 3. Near-duplicate-aware grouped split
 
 Perceptual average hashing was used to identify highly similar image relationships. Related images were grouped before assignment to train, validation and test partitions.
-
-The resulting split contained:
 
 | Partition | Samples |
 |---|---:|
 | Training | 17,480 |
 | Validation | 3,745 |
 | Test | 3,775 |
+
+The current evaluation code labels this protocol as:
+
+```text
+near_duplicate_safe_average_hash_grouped_split
+```
 
 ### Leakage-audit findings
 
@@ -228,7 +224,7 @@ The audit identified:
 - **277 exact resized-image train-test overlaps** in the initial split
 - **543 highly similar train-test relationships** at average-hash Hamming distance `≤ 2`
 
-These findings motivated the stricter evaluation protocols.
+These findings motivated the stricter grouped evaluation protocols.
 
 ---
 
@@ -241,7 +237,7 @@ These findings motivated the stricter evaluation protocols.
 - Images converted to grayscale
 - Downsampled to `32 × 32`
 - Flattened into feature vectors
-- Used as an interpretable non-deep-learning baseline
+- Used as a non-deep-learning baseline
 
 ### Deep-learning models
 
@@ -249,29 +245,25 @@ These findings motivated the stricter evaluation protocols.
 
 A convolutional neural network trained from scratch to provide a deep-learning baseline without pretrained ImageNet features.
 
-#### ResNet-18
+#### ResNet-18 staged fine-tuning
 
-A pretrained ResNet-18 model adapted to the five LC25000 classes using staged fine-tuning.
+A pretrained ResNet-18 adapted to the five LC25000 classes. Training begins with selected layers frozen, followed by deeper fine-tuning.
 
-#### ResNet-18 Head-Only Ablation
+#### ResNet-18 head-only ablation
 
-The pretrained backbone remained frozen while only the classifier head was trained.
-
-This experiment measured the value of deeper backbone fine-tuning.
+The pretrained backbone remains frozen while only the classifier head is trained. This measures the value of deeper backbone adaptation.
 
 #### DenseNet-121
 
-A pretrained DenseNet-121 model adapted and fine-tuned for five-class histopathology classification.
+A pretrained DenseNet-121 adapted and fine-tuned for five-class histopathology classification.
 
 #### EfficientNet-B0
 
-A pretrained EfficientNet-B0 model adapted and fine-tuned for the same task.
+A pretrained EfficientNet-B0 adapted and fine-tuned for the same task.
 
 ---
 
 ## Training Configuration
-
-Core configuration:
 
 | Parameter | Value |
 |---|---|
@@ -288,8 +280,6 @@ Core configuration:
 | Paired bootstrap repetitions | `2,000` |
 | Calibration bins | `10` |
 
-Transfer-learning experiments used staged fine-tuning, allowing deeper layers to be unfrozen after initial classifier training.
-
 ---
 
 ## Leakage-Safe Results
@@ -305,9 +295,7 @@ Results from the resized-image-hash-grouped leakage-safe split:
 | DenseNet-121 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
 | EfficientNet-B0 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
 
-The transfer-learning models substantially outperformed the classical baseline.
-
-The difference between the head-only and staged ResNet-18 configurations also indicates that fine-tuning deeper pretrained features improved performance.
+The transfer-learning models substantially outperformed the classical baseline. The difference between the head-only and staged ResNet-18 configurations also indicates that deeper fine-tuning improved performance.
 
 ### Example leakage-safe confusion matrix
 
@@ -323,7 +311,7 @@ The difference between the head-only and staged ResNet-18 configurations also in
 
 ## Near-Duplicate-Safe Result
 
-The ResNet-18 model evaluated on the stricter near-duplicate-aware split achieved:
+The ResNet-18 model evaluated on the stricter average-hash-grouped split achieved:
 
 | Metric | Result |
 |---|---:|
@@ -334,15 +322,13 @@ The ResNet-18 model evaluated on the stricter near-duplicate-aware split achieve
 | ROC-AUC | 1.0000 |
 | Test samples | 3,775 |
 
-The continued high performance suggests that LC25000 remains highly separable after duplicate and near-duplicate mitigation.
-
-However, this result must still be interpreted cautiously because the dataset is patch-based rather than patient-based.
+The continued high performance suggests that LC25000 remains highly separable after duplicate and near-duplicate mitigation. This result must still be interpreted cautiously because the dataset is patch-based rather than patient-based.
 
 ---
 
 ## Statistical Evaluation
 
-The project includes:
+The repository preserves:
 
 - Bootstrap confidence intervals
 - Paired bootstrap comparisons
@@ -351,8 +337,6 @@ The project includes:
 - Class-level evaluation reports
 - Confusion matrices
 - ROC curves
-
-These analyses were used to assess whether differences between model predictions were likely to reflect meaningful performance changes rather than random test-sample variation.
 
 Relevant outputs are stored under:
 
@@ -373,9 +357,7 @@ lc25000_leakage_safe_all_model_summary.csv
 
 ## Calibration and Confidence
 
-High classification accuracy does not necessarily mean that predicted probabilities are reliable.
-
-The project therefore includes:
+High classification accuracy does not necessarily mean that predicted probabilities are reliable. The project therefore includes:
 
 - Confidence-distribution analysis
 - Expected Calibration Error
@@ -418,19 +400,17 @@ Grad-CAM provides useful qualitative evidence, but it should not be interpreted 
 
 ## Robustness Evaluation
 
-The leakage-safe ResNet-18 model was evaluated under test-time perturbations to examine sensitivity to image-quality changes.
+The leakage-safe ResNet-18 model was evaluated under test-time perturbations including:
 
-The robustness analysis considered transformations such as changes in:
-
-- Brightness
-- Contrast
+- Brightness changes
+- Contrast changes
 - Blur
 - Noise
 - Rotation
 
 Brightness reduction produced the largest observed performance degradation among the tested perturbations.
 
-Robustness outputs are stored under:
+Outputs are stored under:
 
 ```text
 results_summary/robustness/
@@ -440,7 +420,7 @@ results_summary/robustness/
 
 ## Limited External Validation
 
-The leakage-safe ResNet-18 checkpoint was evaluated on `1,974` images from CRC-VAL-HE-7K:
+The leakage-safe ResNet-18 checkpoint was evaluated on `1,974` CRC-VAL-HE-7K images:
 
 | External class | Samples |
 |---|---:|
@@ -448,9 +428,7 @@ The leakage-safe ResNet-18 checkpoint was evaluated on `1,974` images from CRC-V
 | NORM | 741 |
 | Total | 1,974 |
 
-Two evaluation interpretations were reported.
-
-### Strict five-class evaluation
+### Strict five-class interpretation
 
 A prediction was considered correct only when:
 
@@ -462,7 +440,7 @@ A prediction was considered correct only when:
 | Strict five-class external accuracy | 0.8308 |
 | Non-colon prediction rate | 0.0329 |
 
-### Colon-restricted binary evaluation
+### Colon-restricted binary interpretation
 
 Only the two colon-class probabilities were compared:
 
@@ -486,7 +464,196 @@ Only the two colon-class probabilities were compared:
 
 The decline from internal LC25000 performance to external performance demonstrates the importance of domain shift and independent evaluation.
 
-This experiment is limited to two colorectal classes and must not be presented as full external validation of the five-class model.
+This experiment covers only two colorectal classes and must not be presented as full external validation of the five-class model.
+
+---
+
+## FastAPI Research Prototype
+
+The API accepts a histopathology image and returns:
+
+- Predicted class
+- Confidence score
+- Top-three predictions
+- Per-class probabilities
+- Model identifier
+- Explicit research and clinical disclaimer
+
+### Endpoints
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `GET` | `/health` | Service, device and model status |
+| `POST` | `/predict` | Validated image classification |
+| `GET` | `/docs` | Interactive OpenAPI documentation |
+
+The service includes checks for:
+
+- Missing or empty uploads
+- Unsupported media types
+- Invalid image content
+- Maximum upload size
+- Missing model checkpoint
+
+The model is loaded once during application startup and inference uses `torch.inference_mode()`.
+
+### Run locally
+
+Place the trained checkpoint at:
+
+```text
+models/LC25000_TransferCNN_ResNet18_LeakageSafe.pth
+```
+
+Start the API:
+
+```bash
+python -m uvicorn api:app   --app-dir src   --host 0.0.0.0   --port 8000
+```
+
+Health check:
+
+```bash
+curl -i http://localhost:8000/health
+```
+
+Prediction request:
+
+```bash
+curl -i -X POST   -F "file=@path/to/histopathology_image.jpeg;type=image/jpeg"   http://localhost:8000/predict
+```
+
+Interactive documentation:
+
+```text
+http://localhost:8000/docs
+```
+
+### Example response
+
+```json
+{
+  "model": "LC25000_TransferCNN_ResNet18_LeakageSafe",
+  "predicted_class": "lung adenocarcinoma",
+  "predicted_index": 2,
+  "confidence": 1.0,
+  "top_predictions": [
+    {
+      "class_name": "lung adenocarcinoma",
+      "class_index": 2,
+      "probability": 1.0
+    }
+  ],
+  "disclaimer": "Research prototype only. This output is not a clinical diagnosis and must not be used without expert pathological review."
+}
+```
+
+This is an example research output, not a clinical interpretation.
+
+---
+
+## Model Checkpoint
+
+The trained checkpoint is intentionally excluded from Git because it is a large binary artefact.
+
+Expected path:
+
+```text
+models/LC25000_TransferCNN_ResNet18_LeakageSafe.pth
+```
+
+Verified SHA-256 checksum:
+
+```text
+7e55baa06af27d2e6188933e539e0d9a759ffe6a9f0939a326055fab87adecbf
+```
+
+Verify a local copy:
+
+```bash
+shasum -a 256 models/LC25000_TransferCNN_ResNet18_LeakageSafe.pth
+```
+
+The checkpoint corresponds to the leakage-safe ResNet-18 used for the reported internal analysis and limited external colon validation.
+
+The repository does not currently redistribute the trained weight file. Reproduce it through the documented training pipeline or obtain the matching artefact separately before starting the API.
+
+---
+
+## Docker Deployment
+
+The repository includes a tested CPU-only Docker workflow.
+
+The image:
+
+- Uses Python 3.12 slim
+- Installs CPU-only PyTorch
+- Excludes datasets, results, virtual environments and model binaries from the build context
+- Loads the complete trained checkpoint without downloading ImageNet weights at API startup
+- Mounts the checkpoint directory read-only
+
+### Build
+
+```bash
+docker build -t lc25000-api:latest .
+```
+
+### Run
+
+From the repository root:
+
+```bash
+docker run --rm --name lc25000-api   -p 8000:8000   -v "$(pwd)/models:/app/models:ro"   lc25000-api:latest
+```
+
+### Smoke test
+
+In a second terminal:
+
+```bash
+curl -i http://localhost:8000/health
+```
+
+Then submit an image:
+
+```bash
+curl -i -X POST   -F "file=@path/to/histopathology_image.jpeg;type=image/jpeg"   http://localhost:8000/predict
+```
+
+Stop the container with `Control + C`.
+
+---
+
+## Automated Tests and Continuous Integration
+
+The current pytest suite covers:
+
+- Valid image-upload acceptance
+- Invalid image-content rejection
+- Unsupported media-type rejection
+- Empty-upload rejection
+- Non-overlapping saved train, validation and test indices
+- Availability of persisted split artefacts
+
+Run locally:
+
+```bash
+python -m pytest tests -v
+```
+
+Run Ruff:
+
+```bash
+python -m ruff check src/api.py src/model.py tests
+```
+
+GitHub Actions automatically installs the development dependencies and runs code-quality and test checks on repository updates.
+
+Workflow:
+
+```text
+.github/workflows/ci.yml
+```
 
 ---
 
@@ -494,6 +661,10 @@ This experiment is limited to two colorectal classes and must not be presented a
 
 ```text
 .
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
 ├── docs/
 │   └── Supporting documentation
 │
@@ -536,56 +707,79 @@ This experiment is limited to two colorectal classes and must not be presented a
 │   ├── lc25000_external_crc_validation.py
 │   ├── lc25000_leakage_audit_v2.py
 │   ├── lc25000_leakage_safe_split.py
+│   ├── lc25000_near_duplicate_safe_split.py
 │   ├── lc25000_sample_grid.py
 │   ├── main.py
 │   ├── model.py
 │   ├── model_efficiency_analysis.py
 │   ├── run_lc25000_leakage_safe_evaluation.py
+│   ├── run_lc25000_near_duplicate_safe_evaluation.py
 │   ├── statistical_comparison_leakage_safe.py
 │   ├── temperature_scaling.py
 │   ├── train.py
 │   └── visualization.py
 │
+├── tests/
+│   ├── test_api_validation.py
+│   └── test_split_integrity.py
+│
+├── .dockerignore
 ├── CITATION.cff
+├── Dockerfile
 ├── LICENSE
+├── pytest.ini
 ├── README.md
 ├── RESULTS_OVERVIEW.md
 ├── requirements.txt
-└── requirements_full.txt
+├── requirements-dev.txt
+└── requirements-lock.txt
 ```
+
+The `models/` and `datasets/` directories are expected locally but are excluded from version control.
 
 ---
 
 ## Installation
 
-Clone the repository:
+Python `3.12` is recommended.
+
+### Clone
 
 ```bash
 git clone https://github.com/abhishek04gautam-cpu/lc25000-leakage-safe-histopathology.git
 cd lc25000-leakage-safe-histopathology
 ```
 
-Create and activate a virtual environment:
+### Create a virtual environment
+
+macOS or Linux:
 
 ```bash
-python -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 ```
 
-On Windows:
+Windows PowerShell:
 
 ```powershell
-.venv\Scripts\activate
+py -3.12 -m venv .venv
+.venv\Scripts\Activate.ps1
 ```
 
-Upgrade pip and install dependencies:
+### Install runtime dependencies
 
 ```bash
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-`requirements_full.txt` contains the fuller captured development environment.
+### Install development dependencies
+
+```bash
+python -m pip install -r requirements-dev.txt
+```
+
+`requirements-lock.txt` preserves the fuller captured environment used for reproducibility and dependency inspection.
 
 ---
 
@@ -597,13 +791,13 @@ Download or prepare LC25000:
 python src/download_lc25000_dataset.py
 ```
 
-Alternatively, manually place the dataset under:
+Alternatively, manually place it under:
 
 ```text
 datasets/lc25000/
 ```
 
-Confirm that the following folders can be found recursively:
+Confirm that these folders can be found recursively:
 
 ```text
 colon_aca
@@ -618,8 +812,6 @@ lung_scc
 ## Running the Experiments
 
 ### Compile-check the source files
-
-On macOS or Linux:
 
 ```bash
 python -m py_compile $(find src -name "*.py")
@@ -643,13 +835,19 @@ python src/lc25000_classical_baseline.py
 python src/lc25000_leakage_audit_v2.py
 ```
 
-### Create the leakage-safe split
+### Create the exact-duplicate-aware leakage-safe split
 
 ```bash
 python src/lc25000_leakage_safe_split.py
 ```
 
-### Run leakage-safe model evaluations
+### Create the near-duplicate-aware split
+
+```bash
+python src/lc25000_near_duplicate_safe_split.py
+```
+
+### Run leakage-safe evaluations
 
 ```bash
 python src/run_lc25000_leakage_safe_evaluation.py --model logistic
@@ -658,6 +856,12 @@ python src/run_lc25000_leakage_safe_evaluation.py --model resnet18
 python src/run_lc25000_leakage_safe_evaluation.py --model headonly
 python src/run_lc25000_leakage_safe_evaluation.py --model densenet121
 python src/run_lc25000_leakage_safe_evaluation.py --model efficientnetb0
+```
+
+### Run near-duplicate-safe evaluation
+
+```bash
+python src/run_lc25000_near_duplicate_safe_evaluation.py --model resnet18
 ```
 
 ### Run statistical comparisons
@@ -689,9 +893,7 @@ python src/model_efficiency_analysis.py
 
 ### Run external colon validation
 
-Place the CRC-VAL-HE-7K dataset in the expected location or set `CRC_VAL_HE_7K_ROOT`.
-
-The trained checkpoint must be available at:
+Place CRC-VAL-HE-7K in the expected location or set `CRC_VAL_HE_7K_ROOT`, then ensure that the trained checkpoint is present at:
 
 ```text
 models/LC25000_TransferCNN_ResNet18_LeakageSafe.pth
@@ -701,66 +903,6 @@ Run:
 
 ```bash
 python src/lc25000_external_crc_validation.py
-```
-
-Near-duplicate-safe result files and the associated saved artefacts are preserved under:
-
-```text
-results_summary/near_duplicate_safe/
-saved_splits/
-leakage_audit/
-```
-
----
-
-## FastAPI Prototype
-
-The repository includes a research prototype API that accepts a histopathology image and returns:
-
-- Predicted class
-- Confidence score
-- Top-three predictions
-- Per-class probabilities
-- Research disclaimer
-
-Before starting the API, place the trained ResNet-18 checkpoint at:
-
-```text
-models/LC25000_TransferCNN_ResNet18_LeakageSafe.pth
-```
-
-Start the service:
-
-```bash
-uvicorn api:app --app-dir src --host 0.0.0.0 --port 8000
-```
-
-Health endpoint:
-
-```text
-GET /health
-```
-
-Prediction endpoint:
-
-```text
-POST /predict
-```
-
-Example request:
-
-```bash
-curl -X POST \
-  "http://localhost:8000/predict" \
-  -H "accept: application/json" \
-  -H "Content-Type: multipart/form-data" \
-  -F "file=@path/to/histopathology_image.jpeg"
-```
-
-Interactive API documentation is available locally at:
-
-```text
-http://localhost:8000/docs
 ```
 
 ---
@@ -780,6 +922,11 @@ The repository supports reproducibility through:
 - Calibration outputs
 - Grad-CAM examples
 - External-validation prediction tables
+- Dependency specifications
+- Checkpoint checksum
+- Automated tests
+- Continuous integration
+- Containerised CPU inference
 
 Saved splits should be reused when comparing models. Generating new random splits may produce results that are not directly comparable with the published repository outputs.
 
@@ -815,7 +962,9 @@ Important limitations include:
 - Lung classes have not been independently externally validated
 - No prospective clinical evaluation was performed
 - No pathologist-reader study was conducted
-- The FastAPI component is a prototype, not a production medical system
+- The FastAPI and Docker components are research prototypes, not production medical systems
+- The trained checkpoint is not currently redistributed through the repository
+- The Docker workflow has been smoke-tested locally but is not a regulated deployment process
 
 The internal results must therefore be interpreted as benchmark performance under the documented experimental conditions.
 
@@ -851,8 +1000,9 @@ Potential extensions include:
 - Uncertainty-aware prediction and abstention
 - Out-of-distribution detection
 - Model monitoring and drift detection
-- Docker-based deployment
-- Automated tests and CI/CD
+- Automated container-build validation in CI
+- Hosted demonstration with controlled resource limits
+- Model-card and data-card documentation
 - MLflow experiment tracking
 - Cloud deployment
 - Pathologist-in-the-loop evaluation
@@ -879,13 +1029,18 @@ Potential extensions include:
 - Matplotlib
 - Grad-CAM
 
-### API and deployment prototype
+### API, quality and deployment
 
 - FastAPI
 - Uvicorn
 - Pydantic
 - REST API
 - Multipart image upload
+- pytest
+- pytest-cov
+- Ruff
+- GitHub Actions
+- Docker
 
 ### Evaluation
 
@@ -907,60 +1062,30 @@ Potential extensions include:
 
 ## Results and Supporting Material
 
-A concise result summary is available in:
-
-```text
-RESULTS_OVERVIEW.md
-```
-
-Detailed machine-readable outputs are available under:
-
-```text
-results_summary/
-```
-
-Visual outputs are available under:
-
-```text
-figures/
-```
-
-Leakage-audit evidence is available under:
-
-```text
-leakage_audit/
-```
+| Resource | Location |
+|---|---|
+| Concise project results | [`RESULTS_OVERVIEW.md`](RESULTS_OVERVIEW.md) |
+| Machine-readable summaries | [`results_summary/`](results_summary/) |
+| Visual outputs | [`figures/`](figures/) |
+| Leakage-audit evidence | [`leakage_audit/`](leakage_audit/) |
+| Saved split artefacts | [`saved_splits/`](saved_splits/) |
+| Automated tests | [`tests/`](tests/) |
 
 ---
 
 ## References
 
-1. Borkowski, A. A., Bui, M. M., Thomas, L. B., Wilson, C. P.,
-   DeLand, L. A., & Mastorides, S. (2019).
-   *Lung and Colon Cancer Histopathological Image Dataset (LC25000)*.
-   https://arxiv.org/abs/1912.12142
+1. Borkowski, A. A., Bui, M. M., Thomas, L. B., Wilson, C. P., DeLand, L. A., & Mastorides, S. (2019). *Lung and Colon Cancer Histopathological Image Dataset (LC25000)*. https://arxiv.org/abs/1912.12142
 
-2. Kather, J. N., Halama, N., & Marx, A. (2018).
-   *100,000 Histological Images of Human Colorectal Cancer and Healthy Tissue*.
-   Zenodo. https://doi.org/10.5281/zenodo.1214456
+2. Kather, J. N., Halama, N., & Marx, A. (2018). *100,000 Histological Images of Human Colorectal Cancer and Healthy Tissue*. Zenodo. https://doi.org/10.5281/zenodo.1214456
 
-3. He, K., Zhang, X., Ren, S., & Sun, J. (2015).
-   *Deep Residual Learning for Image Recognition*.
-   https://arxiv.org/abs/1512.03385
+3. He, K., Zhang, X., Ren, S., & Sun, J. (2015). *Deep Residual Learning for Image Recognition*. https://arxiv.org/abs/1512.03385
 
-4. Huang, G., Liu, Z., van der Maaten, L., & Weinberger, K. Q. (2016).
-   *Densely Connected Convolutional Networks*.
-   https://arxiv.org/abs/1608.06993
+4. Huang, G., Liu, Z., van der Maaten, L., & Weinberger, K. Q. (2016). *Densely Connected Convolutional Networks*. https://arxiv.org/abs/1608.06993
 
-5. Tan, M., & Le, Q. V. (2019).
-   *EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks*.
-   https://arxiv.org/abs/1905.11946
+5. Tan, M., & Le, Q. V. (2019). *EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks*. https://arxiv.org/abs/1905.11946
 
-6. Selvaraju, R. R., Cogswell, M., Das, A., Vedantam, R.,
-   Parikh, D., & Batra, D. (2016).
-   *Grad-CAM: Visual Explanations from Deep Networks via
-   Gradient-Based Localization*.
-   https://arxiv.org/abs/1610.02391
+6. Selvaraju, R. R., Cogswell, M., Das, A., Vedantam, R., Parikh, D., & Batra, D. (2016). *Grad-CAM: Visual Explanations from Deep Networks via Gradient-Based Localization*. https://arxiv.org/abs/1610.02391
 
 ---
 
@@ -978,15 +1103,7 @@ When using this software or its experimental outputs, cite the repository and, w
 
 ## Licence
 
-This project is released under the MIT License.
-
-See:
-
-```text
-LICENSE
-```
-
-for the complete licence terms.
+This project is released under the [MIT License](LICENSE).
 
 ---
 
@@ -1007,10 +1124,15 @@ Former Software Engineer at HCL Technologies
 ## Project Status
 
 - MSc dissertation completed
+- Exact-duplicate leakage audit completed
 - Leakage-safe experiments completed
 - Near-duplicate-aware evaluation completed
 - Statistical analysis completed
 - Calibration and explainability analysis completed
+- Robustness analysis completed
 - Limited external colon validation completed
 - FastAPI research prototype completed
+- Automated tests completed
+- GitHub Actions CI completed
+- CPU-only Docker build and inference smoke test completed
 - Research manuscript in preparation
