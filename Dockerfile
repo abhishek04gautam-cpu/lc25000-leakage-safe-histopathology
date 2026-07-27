@@ -16,15 +16,4 @@ RUN mkdir -p /app/models
 
 EXPOSE 8000
 
-CMD [
-    "python",
-    "-m",
-    "uvicorn",
-    "api:app",
-    "--app-dir",
-    "src",
-    "--host",
-    "0.0.0.0",
-    "--port",
-    "8000"
-]
+CMD ["python", "-m", "uvicorn", "api:app", "--app-dir", "src", "--host", "0.0.0.0", "--port", "8000"]
