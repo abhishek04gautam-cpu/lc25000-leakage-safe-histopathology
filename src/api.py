@@ -104,6 +104,7 @@ def load_lc25000_model() -> TransferCNN:
     loaded_model = TransferCNN(
         num_classes=len(LC25000_CLASS_NAMES),
         training_mode="staged_finetune",
+        load_pretrained_weights=False,
     )
     loaded_model.model_name = DEPLOYED_MODEL_NAME
 

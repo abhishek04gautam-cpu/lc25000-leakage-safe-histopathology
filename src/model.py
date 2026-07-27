@@ -1,10 +1,15 @@
 """Model definitions for the LC25000 cancer image classification framework."""
-import torch.nn as nn
 import torch.nn.functional as F
+from torch import nn
 from torchvision.models import (
-    DenseNet121_Weights, EfficientNet_B0_Weights, ResNet18_Weights,
-    densenet121, efficientnet_b0, resnet18,
+    DenseNet121_Weights,
+    EfficientNet_B0_Weights,
+    ResNet18_Weights,
+    densenet121,
+    efficientnet_b0,
+    resnet18,
 )
+
 
 def get_models(dataset):
     if dataset.data_type != "image":
@@ -37,7 +42,12 @@ class SimpleCNN(nn.Module):
         return self.fc2(x)
 
 class TransferCNN(nn.Module):
-    def __init__(self, num_classes, training_mode="staged_finetune"):
+    def __init__(
+        self,
+        num_classes,
+        training_mode="staged_finetune",
+        load_pretrained_weights=True,
+    ):
         super().__init__()
         self.training_mode = training_mode
         self.backbone_family = "resnet"
@@ -48,7 +58,12 @@ class TransferCNN(nn.Module):
             self.model_name = "TransferCNN_ResNet18"
         else:
             raise ValueError("training_mode must be 'staged_finetune' or 'head_only'.")
-        self.model = resnet18(weights=ResNet18_Weights.DEFAULT)
+        weights = (
+            ResNet18_Weights.DEFAULT
+            if load_pretrained_weights
+            else None
+        )
+        self.model = resnet18(weights=weights)
         in_features = self.model.fc.in_features
         self.model.fc = nn.Sequential(nn.Linear(in_features, 256), nn.ReLU(), nn.Dropout(0.5), nn.Linear(256, num_classes))
         if training_mode == "head_only":
@@ -64,7 +79,9 @@ class TransferCNN(nn.Module):
 
     def freeze_for_staged_finetuning(self):
         for name, parameter in self.model.named_parameters():
-            parameter.requires_grad = not (name.startswith("conv1") or name.startswith("bn1") or name.startswith("layer1") or name.startswith("layer2"))
+            parameter.requires_grad = not name.startswith(
+                ("conv1", "bn1", "layer1", "layer2")
+            )
         for parameter in self.model.fc.parameters():
             parameter.requires_grad = True
 
@@ -98,7 +115,7 @@ class TransferDenseNet121(nn.Module):
         for parameter in self.model.parameters():
             parameter.requires_grad = False
         for name, parameter in self.model.features.named_parameters():
-            if name.startswith("denseblock4") or name.startswith("norm5"):
+            if name.startswith(("denseblock4", "norm5")):
                 parameter.requires_grad = True
         for parameter in self.model.classifier.parameters():
             parameter.requires_grad = True
