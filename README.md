@@ -39,6 +39,7 @@ Rather than reporting accuracy alone, the repository presents an end-to-end evid
 ### Reviewer shortcuts
 
 - [Results overview](RESULTS_OVERVIEW.md)
+- [Model card](MODEL_CARD.md)
 - [FastAPI implementation](src/api.py)
 - [Model definitions](src/model.py)
 - [Automated tests](tests/)
