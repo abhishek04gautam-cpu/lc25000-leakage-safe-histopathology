@@ -933,6 +933,37 @@ leakage_audit/
 
 ---
 
+## References
+
+1. Borkowski, A. A., Bui, M. M., Thomas, L. B., Wilson, C. P.,
+   DeLand, L. A., & Mastorides, S. (2019).
+   *Lung and Colon Cancer Histopathological Image Dataset (LC25000)*.
+   https://arxiv.org/abs/1912.12142
+
+2. Kather, J. N., Halama, N., & Marx, A. (2018).
+   *100,000 Histological Images of Human Colorectal Cancer and Healthy Tissue*.
+   Zenodo. https://doi.org/10.5281/zenodo.1214456
+
+3. He, K., Zhang, X., Ren, S., & Sun, J. (2015).
+   *Deep Residual Learning for Image Recognition*.
+   https://arxiv.org/abs/1512.03385
+
+4. Huang, G., Liu, Z., van der Maaten, L., & Weinberger, K. Q. (2016).
+   *Densely Connected Convolutional Networks*.
+   https://arxiv.org/abs/1608.06993
+
+5. Tan, M., & Le, Q. V. (2019).
+   *EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks*.
+   https://arxiv.org/abs/1905.11946
+
+6. Selvaraju, R. R., Cogswell, M., Das, A., Vedantam, R.,
+   Parikh, D., & Batra, D. (2016).
+   *Grad-CAM: Visual Explanations from Deep Networks via
+   Gradient-Based Localization*.
+   https://arxiv.org/abs/1610.02391
+
+---
+
 ## Citation
 
 Citation metadata is provided in:
