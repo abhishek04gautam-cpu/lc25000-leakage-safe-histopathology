@@ -1,4 +1,4 @@
-name: Code Quality and Tests
+name: Code Quality, Tests and Docker Build
 
 on:
   push:
@@ -35,8 +35,21 @@ jobs:
 
       - name: Run Ruff
         run: |
-          python -m ruff check src/api.py tests
+          python -m ruff check src/api.py src/model.py tests
 
       - name: Run tests
         run: |
           python -m pytest tests -v
+
+  docker-build:
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Build CPU inference image
+        run: |
+          docker build --tag lc25000-api:ci .
